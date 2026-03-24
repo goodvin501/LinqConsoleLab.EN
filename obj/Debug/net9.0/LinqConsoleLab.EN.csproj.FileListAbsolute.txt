@@ -1,0 +1,14 @@
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/bin/Debug/net9.0/LinqConsoleLab.EN
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/bin/Debug/net9.0/LinqConsoleLab.EN.deps.json
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/bin/Debug/net9.0/LinqConsoleLab.EN.runtimeconfig.json
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/bin/Debug/net9.0/LinqConsoleLab.EN.dll
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/bin/Debug/net9.0/LinqConsoleLab.EN.pdb
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/obj/Debug/net9.0/LinqConsoleLab.EN.GeneratedMSBuildEditorConfig.editorconfig
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/obj/Debug/net9.0/LinqConsoleLab.EN.AssemblyInfoInputs.cache
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/obj/Debug/net9.0/LinqConsoleLab.EN.AssemblyInfo.cs
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/obj/Debug/net9.0/LinqConsoleLab.EN.csproj.CoreCompileInputs.cache
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/obj/Debug/net9.0/LinqConsoleLab.EN.dll
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/obj/Debug/net9.0/refint/LinqConsoleLab.EN.dll
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/obj/Debug/net9.0/LinqConsoleLab.EN.pdb
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/obj/Debug/net9.0/LinqConsoleLab.EN.genruntimeconfig.cache
+/Users/pgago/Downloads/materiały_na_stronę/apbd/wykład_3/LinqConsoleLab.EN/obj/Debug/net9.0/ref/LinqConsoleLab.EN.dll
