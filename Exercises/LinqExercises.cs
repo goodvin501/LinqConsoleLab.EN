@@ -16,7 +16,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task01_StudentsFromWarsaw()
     {
-        throw NotImplemented(nameof(Task01_StudentsFromWarsaw));
+        var res = from s in UniversityData.Students
+            where s.City.Equals("Warsaw")
+            select $"{s.IndexNumber} {s.FirstName} {s.LastName} {s.City}";
+        return res;
     }
 
     /// <summary>
@@ -30,7 +33,9 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task02_StudentEmailAddresses()
     {
-        throw NotImplemented(nameof(Task02_StudentEmailAddresses));
+        var res = from s in  UniversityData.Students
+            select s.Email;
+        return res;
     }
 
     /// <summary>
@@ -45,7 +50,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task03_StudentsSortedAlphabetically()
     {
-        throw NotImplemented(nameof(Task03_StudentsSortedAlphabetically));
+        var res =  from s in UniversityData.Students
+            orderby s.FirstName, s.LastName
+            select $"{s.IndexNumber} {s.FirstName} {s.LastName}";
+        return res;
     }
 
     /// <summary>
@@ -60,7 +68,19 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task04_FirstAnalyticsCourse()
     {
-        throw NotImplemented(nameof(Task04_FirstAnalyticsCourse));
+        var course = UniversityData.Courses
+            .Where(c => c.Category == "Analytics")
+            .Select(c => $"{c.Title} - {c.StartDate}")
+            .FirstOrDefault();
+
+        if (!string.IsNullOrEmpty(course))
+        {
+            return new List<string> { course };
+        }
+        else
+        {
+            return new List<string> { "No Analytics course found" };
+        }
     }
 
     /// <summary>
@@ -77,7 +97,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task05_IsThereAnyInactiveEnrollment()
     {
-        throw NotImplemented(nameof(Task05_IsThereAnyInactiveEnrollment));
+        var hasInactive = UniversityData.Enrollments
+            .Any(e => e.IsActive == false);
+
+        return new List<string> { hasInactive.ToString() };
     }
 
     /// <summary>
@@ -92,7 +115,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task06_DoAllLecturersHaveDepartment()
     {
-        throw NotImplemented(nameof(Task06_DoAllLecturersHaveDepartment));
+        var allHaveDepartment = UniversityData.Lecturers
+            .All(l => String.IsNullOrEmpty(l.Department));
+
+        return new List<string> { allHaveDepartment.ToString() };
     }
 
     /// <summary>
@@ -106,7 +132,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task07_CountActiveEnrollments()
     {
-        throw NotImplemented(nameof(Task07_CountActiveEnrollments));
+        var numEnrollments = UniversityData.Enrollments
+            .Count(e => e.IsActive);
+
+        return new List<string> { numEnrollments.ToString() };
     }
 
     /// <summary>
@@ -120,7 +149,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task08_DistinctStudentCities()
     {
-        throw NotImplemented(nameof(Task08_DistinctStudentCities));
+        var distinctOrdered = UniversityData.Students.Select(s => s.City)
+            .Distinct()
+            .OrderBy(s => s);
+       return distinctOrdered;
     }
 
     /// <summary>
@@ -135,7 +167,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task09_ThreeNewestEnrollments()
     {
-        throw NotImplemented(nameof(Task09_ThreeNewestEnrollments));
+        var top3Enroll =  (from e in UniversityData.Enrollments
+            orderby e.EnrollmentDate descending
+            select $"{e.EnrollmentDate} {e.StudentId} {e.CourseId}").Take(3);
+        return top3Enroll;
     }
 
     /// <summary>
@@ -151,7 +186,12 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task10_SecondPageOfCourses()
     {
-        throw NotImplemented(nameof(Task10_SecondPageOfCourses));
+        var courses = UniversityData.Courses
+            .OrderBy(c => c.Title)
+            .Skip(2)
+            .Take(2)
+            .Select(c => $"{c.Title} - {c.Category}");
+        return courses;
     }
 
     /// <summary>
@@ -166,7 +206,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task11_JoinStudentsWithEnrollments()
     {
-        throw NotImplemented(nameof(Task11_JoinStudentsWithEnrollments));
+        var joinedEnrollments = from s in UniversityData.Students
+            join e in UniversityData.Enrollments on s.Id equals e.StudentId
+            select $"{s.FirstName} {s.LastName} {e.EnrollmentDate}";
+        return joinedEnrollments;
     }
 
     /// <summary>
@@ -182,7 +225,11 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task12_StudentCoursePairs()
     {
-        throw NotImplemented(nameof(Task12_StudentCoursePairs));
+        var joinedEnrollments = from e in UniversityData.Enrollments
+            join s in UniversityData.Students on e.StudentId equals s.Id
+            join c in UniversityData.Courses on e.CourseId equals c.Id
+            select $"{s.FirstName} {s.LastName} {c.Title}";
+        return joinedEnrollments;
     }
 
     /// <summary>
@@ -197,7 +244,11 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task13_GroupEnrollmentsByCourse()
     {
-        throw NotImplemented(nameof(Task13_GroupEnrollmentsByCourse));
+        var numEnrollments = from e in UniversityData.Enrollments
+            join c in UniversityData.Courses on e.CourseId equals c.Id
+            group c by c.Title into grp
+                select $"{grp.Key} {grp.Count()}";
+        return numEnrollments;
     }
 
     /// <summary>
@@ -214,7 +265,13 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task14_AverageGradePerCourse()
     {
-        throw NotImplemented(nameof(Task14_AverageGradePerCourse));
+        var avgGrade = from e in UniversityData.Enrollments
+            join c in UniversityData.Courses on e.CourseId equals c.Id
+            where e.FinalGrade.HasValue
+            group e by c.Title into grp
+            select $"{grp.Key} {grp.Average(e => e.FinalGrade)}";
+
+        return avgGrade;
     }
 
     /// <summary>
@@ -230,7 +287,12 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task15_LecturersAndCourseCounts()
     {
-        throw NotImplemented(nameof(Task15_LecturersAndCourseCounts));
+        var countLec = from l in UniversityData.Lecturers
+            join c in UniversityData.Courses on l.Id equals c.LecturerId
+            group l by new { l.FirstName, l.LastName } into grp
+            select $"{grp.Key.FirstName} {grp.Key.LastName}: {grp.Count()}";
+
+        return countLec.ToList();
     }
 
     /// <summary>
@@ -247,7 +309,13 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task16_HighestGradePerStudent()
     {
-        throw NotImplemented(nameof(Task16_HighestGradePerStudent));
+        var highestGrade = from s in UniversityData.Students
+            join e in UniversityData.Enrollments on s.Id equals e.StudentId
+            where e.FinalGrade.HasValue
+            group e by new { s.FirstName, s.LastName } into grp
+            select $"{grp.Key.FirstName} {grp.Key.LastName}: {grp.Max(e => e.FinalGrade)}";
+
+        return highestGrade;
     }
 
     /// <summary>
@@ -265,7 +333,13 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Challenge01_StudentsWithMoreThanOneActiveCourse()
     {
-        throw NotImplemented(nameof(Challenge01_StudentsWithMoreThanOneActiveCourse));
+        var moreThan1Enrollment = from e in UniversityData.Enrollments
+            join s in UniversityData.Students on e.StudentId equals s.Id
+            where e.IsActive == true
+                group e by new { s.FirstName, s.LastName } into grp
+            where grp.Count() > 1
+                select $"{grp.Key.FirstName} {grp.Key.LastName}: {grp.Count()}";
+        return moreThan1Enrollment;
     }
 
     /// <summary>
