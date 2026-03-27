@@ -356,7 +356,12 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Challenge02_AprilCoursesWithoutFinalGrades()
     {
-        throw NotImplemented(nameof(Challenge02_AprilCoursesWithoutFinalGrades));
+        var res = (from c in UniversityData.Courses
+            join e in UniversityData.Enrollments on c.Id equals e.CourseId
+            where c.StartDate.Month == 4 && c.StartDate.Year == 2026
+                && e.FinalGrade == null
+            select c.Title).Distinct();
+        return res;
     }
 
     /// <summary>
@@ -374,7 +379,14 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Challenge03_LecturersAndAverageGradeAcrossTheirCourses()
     {
-        throw NotImplemented(nameof(Challenge03_LecturersAndAverageGradeAcrossTheirCourses));
+        var res = from l in UniversityData.Lecturers
+            join c in UniversityData.Courses on l.Id equals c.LecturerId
+            join e in UniversityData.Enrollments on c.Id equals e.CourseId
+            where e.FinalGrade != null
+            group e.FinalGrade by new { l.FirstName, l.LastName } into g
+            select $"{g.Key.FirstName} {g.Key.LastName}: {g.Average():F2}";
+
+        return res;
     }
 
     /// <summary>
@@ -392,7 +404,14 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Challenge04_CitiesAndActiveEnrollmentCounts()
     {
-        throw NotImplemented(nameof(Challenge04_CitiesAndActiveEnrollmentCounts));
+        var res = from s in UniversityData.Students
+            join e in UniversityData.Enrollments on s.Id equals e.StudentId
+            where e.IsActive == true
+            group s by s.City into cityGroup
+            orderby cityGroup.Count() descending
+            select $"{cityGroup.Key}: {cityGroup.Count()}";
+
+        return res;
     }
 
     private static NotImplementedException NotImplemented(string methodName)
